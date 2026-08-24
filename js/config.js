@@ -17,7 +17,7 @@ window.LLC_CONFIG = {
 
   instagramUser: "larsbertocarlos",
   instagramUrl: "https://www.instagram.com/larsbertocarlos/",
-  instagramEmbed: "",
+  instagramEmbed: "https://www.instagram.com/larsbertocarlos?igsi=dGZ4c3VzMG9hazE=",
 
   googleCalendarId: "webcal://www.holdsport.dk/activities.ics?hide_pickup_time=true&token=exiJ7Su3cYAGRcJlqm%2Bsqg%3D%3D&v=1",
   googleCalendarTz: "Europe/Copenhagen",
