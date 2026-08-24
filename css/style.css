@@ -39,11 +39,11 @@
   --motion-quick: 150ms;
 }
 *, *::before, *::after { box-sizing: border-box; }
-html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; overflow-x: clip; }
+html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; overflow-x: hidden; }
 body {
   margin: 0; background: var(--bg); color: var(--fg);
   font-family: var(--font-body); font-size: var(--text-base);
-  line-height: 1.55; min-height: 100dvh; overflow-x: clip;
+  line-height: 1.55; min-height: 100dvh; overflow-x: hidden;
 }
 img { max-width: 100%; height: auto; display: block; }
 a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 3px; }
@@ -64,7 +64,7 @@ p:last-child { margin-bottom: 0; }
   display: inline-block; font-family: var(--font-display); font-size: 0.75rem;
   letter-spacing: 0.18em; text-transform: uppercase; color: var(--red); margin-bottom: var(--space-3);
 }
-.wrap { width: min(var(--wrap), calc(100% - 40px)); margin-inline: auto; }
+.wrap { width: min(var(--wrap), calc(100% - 32px)); margin-inline: auto; }
 .section { padding: var(--space-8) 0; }
 .section-tight { padding: var(--space-7) 0; }
 .section-head {
@@ -202,7 +202,14 @@ p:last-child { margin-bottom: 0; }
 }
 .embed-frame iframe { width: 100%; height: 640px; border: 0; border-radius: var(--radius-md); background: #fff; }
 .embed-frame h3 { color: var(--fg); margin-bottom: 8px; }
-.table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius-md); }
+.table-wrap {
+  overflow-x: auto; -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain; max-width: 100%;
+  border: 1px solid var(--border); border-radius: var(--radius-md);
+  touch-action: pan-x pan-y;
+}
+.table-wrap table { min-width: 36rem; width: max-content; max-width: none; }
+.split > * { min-width: 0; }
 table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; font-size: var(--text-sm); }
 th, td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--border); }
 th {
@@ -390,3 +397,12 @@ input:focus, textarea:focus, select:focus {
 .report-card h3 { font-size: 1.25rem; text-transform: uppercase; }
 .report-card a { color: var(--cream); }
 @media (max-width: 720px) { .gallery-grid { grid-template-columns: 1fr; } }
+
+@media (max-width: 800px) {
+  .table-wrap { display: block; }
+  .table-wrap::after {
+    content: "Stryg til siden for hele tabellen →";
+    display: block; padding: 8px 12px;
+    font-size: 0.75rem; color: var(--fg-subtle);
+  }
+}
