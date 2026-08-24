@@ -27,9 +27,9 @@ window.LLC_CONFIG = {
     "https://resultater.dai-sport.dk/tms/Turneringer-og-resultater/Forening-Information.aspx?ForeningsId=1457",
   daiVenueUrl:
     "https://resultater.dai-sport.dk/tms/Turneringer-og-resultater/Spillested-Information.aspx?SpillestedsId=974",
-  daiIframeUrl: "",
+  daiIframeUrl: "https://resultater.dai-sport.dk/tms/Turneringer-og-resultater/Forening-Stillinger.aspx?ForeningsId=1457",
 
-  holdsportUrl: "https://www.holdsport.dk/activities",
+  holdsportUrl: "https://resultater.dai-sport.dk/tms/Turneringer-og-resultater/Forening-Kampprogram.aspx?ForeningsId=1457",
   holdsportWidget: "",
   teamsboxUrl: "",
 
