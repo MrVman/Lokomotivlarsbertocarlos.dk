@@ -4,9 +4,9 @@
  */
 window.LLC_DATA = {
   coaches: [
-    { name: "Mads Ravn", role: "Cheftræner" },
-    { name: "Sofie Kjaer", role: "Assistenttræner" },
-    { name: "Jonas Bæk", role: "Holdleder" },
+    { name: "Olsen", role: "SoMe" },
+    { name: "Værnet & Souary", role: "Bødlerne" },
+    { name: "Daae", role: "Fitness" },
   ],
 
   squad: [
