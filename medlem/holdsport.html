@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Holdsport — LLC</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#0c0c0d">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Oswald:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body data-page="portal-holdsport">
+  <div id="site-header"></div>
+  <header class="page-hero">
+    <div class="wrap">
+      <p class="kicker">Appen I allerede bruger</p>
+      <h1>Holdsport</h1>
+    </div>
+  </header>
+  <section class="section">
+    <div class="wrap">
+      <nav class="portal-nav">
+        <a href="index.html">Overblik</a>
+        <a href="spillere.html">Numre & licenser</a>
+        <a href="dokumenter.html">Dokumenter</a>
+        <a href="holdsport.html" aria-current="page">Holdsport</a>
+        <a href="opslagstavle.html">Opslagstavle</a>
+        <a href="boder.html">Bøder</a>
+        <button class="btn btn-ghost" type="button" id="logout-btn">Log ud</button>
+      </nav>
+      <div class="embed-frame" id="holdsport">
+        <div>
+          <h3>Holdsport-URL mangler</h3>
+          <p>Sæt <code>holdsportUrl</code> i config.js til klubbens Holdsport-side, eller indsæt et widget-embed i <code>holdsportWidget</code>.</p>
+          <a class="btn btn-ghost" href="https://www.holdsport.dk" rel="noopener">holdsport.dk</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div id="site-footer"></div>
+  <script src="../js/config.js"></script>
+  <script src="../js/data.js"></script>
+  <script src="../js/layout.js"></script>
+  <script src="../js/portal.js"></script>
+</body>
+</html>
