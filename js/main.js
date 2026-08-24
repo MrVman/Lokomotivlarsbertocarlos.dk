@@ -48,6 +48,7 @@
         ig.innerHTML = (D().instagram || [])
           .map(
             (p) => `<figure class="insta-item tone-${p.tone || "kamp"}">
+              ${p.src ? `<img src="${p.src}" alt="${p.caption}">` : ""}
               <figcaption>@${C().instagramUser} · ${p.date}<br>${p.caption}</figcaption>
             </figure>`
           )
@@ -204,6 +205,7 @@
       grid.innerHTML = shown
         .map(
           (i) => `<figure class="tone-${i.tone || "kamp"}">
+            ${i.src ? `<img src="${i.src}" alt="${i.title}">` : ""}
             <figcaption>${i.title} · ${i.year}</figcaption>
           </figure>`
         )

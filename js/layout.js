@@ -42,7 +42,7 @@
       <header class="site-header">
         <div class="wrap header-inner">
           <a class="brand" href="${p}index.html">
-            <img src="${p}assets/logo.svg" alt="" width="36" height="48">
+            <img src="${p}assets/logo-white.png" alt="" width="48" height="62">
             <span class="brand-name">Lokomotiv<small>Larsbertocarlos</small></span>
           </a>
           <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu">
@@ -60,7 +60,7 @@
       <footer class="site-footer">
         <div class="wrap footer-grid">
           <div class="footer-brand">
-            <img src="${p}assets/logo.svg" alt="Lokomotiv Larsbertocarlos">
+            <img src="${p}assets/logo-white.png" alt="Lokomotiv Larsbertocarlos">
             <p>Amatørklub i DAI Region Hovedstaden. Hjemmebane i Valby Idrætspark. Stiftet 9. december 2016.</p>
           </div>
           <div>
