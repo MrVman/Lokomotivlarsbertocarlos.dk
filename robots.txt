@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /medlem/
+
+Sitemap: https://lokomotivlarsbertocarlos.dk/sitemap.txt
