@@ -76,10 +76,10 @@ window.LLC_DATA = {
   ],
 
   kits: [
-    { id: "blue", name: "Klasikeren", years: "2016–2018", shirt: "Blå/Hvid", shorts: "Hvid", note: "Den første rigtige trøje." },
-    { id: "yellow", name: "Gul", years: "2016–2022", shirt: "Gul", shorts: "Sort", note: "Synlig i efterårsmørket på kunstgræs." },
-    { id: "whiteblue", name: "Den Stramme", years: "2022–2026", shirt: "Hvid med blå", shorts: "Hvid", note: "...et statement." },
-    { id: "redblue", name: "Den kontroversielle", years: "2022–2026", shirt: "Rød med blå", shorts: "Hvid", note: "Trøje Gate 6.7" },
+    { id: "whiteblue", name: "Den blå og hvide", years: "2016–", shirt: "Navy / hvid chevron", shorts: "Hvid", note: "Klasikeren. Nike, V-stribe.", photo: "assets/img/kits/bluewhite.jpg" },
+    { id: "yellow", name: "Den gule", years: "2016–2022", shirt: "Gul / blå ternet", shorts: "Hvid", note: "Synlig i efterårsmørket.", photo: "assets/img/kits/yellow.jpg" },
+    { id: "redblue", name: "Den røde og blå", years: "2022–2026", shirt: "Navy / rød", shorts: "Hvid", note: "Joma. Trøje Gate 6.7.", photo: "assets/img/kits/redblue.jpg" },
+    { id: "blue", name: "Den blå", years: "2022–2026", shirt: "Navy pinstripe", shorts: "Navy", note: "Joma. Bauhaus i ryggen.", photo: "assets/img/kits/blue.jpg" },
     { id: "current", name: "Striberne", years: "2026–", shirt: "Rød/sort stribe", shorts: "Sort", note: "Nuværende hjemmebane." },
   ],
 

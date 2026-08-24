@@ -138,10 +138,11 @@
       kits.innerHTML = (D().kits || [])
         .map(
           (k) => `<article class="kit-card kit-${k.id}">
-            <div class="jersey" aria-hidden="true"><span class="collar"></span></div>
-            <div class="shorts" aria-hidden="true"></div>
+            ${k.photo
+              ? `<img src="${k.photo}" alt="${k.name}">`
+              : `<div class="jersey" aria-hidden="true"><span class="collar"></span></div><div class="shorts" aria-hidden="true"></div>`}
             <h3>${k.name}</h3>
-            <p>${k.years}<br>${k.shirt} / ${k.shorts}<br>${k.note}</p>
+            <p>${k.years}<br>${k.shirt}<br>${k.note}</p>
           </article>`
         )
         .join("");

@@ -227,10 +227,14 @@ tr.is-us { background: color-mix(in oklab, var(--red) 16%, transparent); }
 @media (max-width: 520px) { .kit-grid { grid-template-columns: 1fr; } }
 .kit-card {
   background: var(--bg-elevated); border: 1px solid var(--border);
-  border-radius: var(--radius-lg); padding: var(--space-5) 28px; text-align: center; overflow: hidden;
+  border-radius: var(--radius-lg); padding: 0 0 18px; text-align: left; overflow: hidden;
 }
-.kit-card h3 { font-size: 1.15rem; margin: 12px 0 4px; }
-.kit-card p { color: var(--fg-subtle); font-size: var(--text-sm); }
+.kit-card img {
+  width: 100%; aspect-ratio: 3 / 4; object-fit: cover; object-position: center 12%;
+  background: var(--bg-subtle);
+}
+.kit-card h3 { font-size: 1.15rem; margin: 14px 16px 4px; }
+.kit-card p { color: var(--fg-subtle); font-size: var(--text-sm); margin: 0 16px; }
 .jersey {
   width: 92px; height: 108px; margin: 0 auto 6px; position: relative;
   border-radius: 10px 10px 14px 14px;
