@@ -47,10 +47,12 @@
       } else {
         ig.innerHTML = (D().instagram || [])
           .map(
-            (p) => `<figure class="insta-item tone-${p.tone || "kamp"}">
-              ${p.src ? `<img src="${p.src}" alt="${p.caption}">` : ""}
-              <figcaption>@${C().instagramUser} · ${p.date}<br>${p.caption}</figcaption>
-            </figure>`
+            (p) => `<a class="ig-card tone-${p.tone || "kamp"}" href="${p.url}" rel="noopener">
+              <span class="ig-score">${p.result || "LLC"}</span>
+              <span class="ig-meta">@${C().instagramUser} · ${p.date}</span>
+              <strong>${p.opponent || ""}</strong>
+              <span class="ig-cap">${p.caption}</span>
+            </a>`
           )
           .join("");
       }
@@ -204,10 +206,14 @@
       const shown = cat === "alle" ? items : items.filter((i) => i.cat === cat);
       grid.innerHTML = shown
         .map(
-          (i) => `<figure class="tone-${i.tone || "kamp"}">
-            ${i.src ? `<img src="${i.src}" alt="${i.title}">` : ""}
-            <figcaption>${i.title} · ${i.year}</figcaption>
-          </figure>`
+          (i) => `<article class="report-card">
+            <p class="kicker">${fmtDate(i.date) || i.year} · ${i.cat}</p>
+            <p class="report-score">${i.result || "Galla"}</p>
+            <h3>${i.title}</h3>
+            <p>${i.excerpt}</p>
+            ${i.motm ? `<p class="form-note">MOTM: ${i.motm}</p>` : ""}
+            <a href="${i.url}" rel="noopener">${i.tags || "Instagram"} →</a>
+          </article>`
         )
         .join("");
     }
