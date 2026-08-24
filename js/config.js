@@ -17,7 +17,7 @@ window.LLC_CONFIG = {
 
   instagramUser: "larsbertocarlos",
   instagramUrl: "https://www.instagram.com/larsbertocarlos/",
-  instagramEmbed: "https://www.instagram.com/larsbertocarlos?igsi=dGZ4c3VzMG9hazE=",
+  instagramEmbed: "",
 
   googleCalendarId: "30ksf11tuqkhqe0v6j0ed58q22e8s0j3@import.calendar.google.com",
   googleCalendarTz: "Europe/Copenhagen",
