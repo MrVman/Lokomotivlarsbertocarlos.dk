@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kampe og stilling — Lokomotiv Larsbertocarlos</title>
+  <meta name="description" content="Kampprogram, resultater og stilling. Live data fra DAI, når iframe-adressen er sat i config.js.">
+  <meta name="theme-color" content="#0c0c0d">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Oswald:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="kampe">
+  <div id="site-header"></div>
+  <header class="page-hero">
+    <div class="wrap">
+      <p class="kicker">Sæsonen</p>
+      <h1>Kampe, resultater, stilling</h1>
+      <p class="lede">Klubben spiller i DAI Region Hovedstaden. Når puljen er oprettet, indsættes DAI-iframen i config.js — indtil da vises klubbens eget program.</p>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="kicker">DAI</p>
+          <h2>Turneringsside</h2>
+        </div>
+        <a class="btn btn-ghost" href="https://resultater.dai-sport.dk/tms/Turneringer-og-resultater/Forening-Information.aspx?ForeningsId=1457" rel="noopener">Åbn DAI</a>
+      </div>
+      <div class="embed-frame" id="dai-frame">
+        <div>
+          <p class="kicker">Placeholder</p>
+          <h3>DAI iframe</h3>
+          <p>Sæt <code>daiIframeUrl</code> i <code>js/config.js</code> til puljens kampprogram, så stilling og resultater vises her.<br>Klubbens foreningsside er allerede forbundet: ForeningsId 1457.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="wrap split">
+      <div>
+        <p class="kicker">Program</p>
+        <h2>Kommende kampe</h2>
+        <div class="table-wrap" style="margin-top:16px">
+          <table>
+            <thead><tr><th>Tid</th><th>H/U</th><th>Modstander</th><th>Bane</th></tr></thead>
+            <tbody id="upcoming"></tbody>
+          </table>
+        </div>
+        <p class="kicker" style="margin-top:32px">Spillet</p>
+        <h2>Seneste resultater</h2>
+        <div class="table-wrap" style="margin-top:16px">
+          <table>
+            <thead><tr><th>Dato</th><th>Kamp</th><th>Res</th></tr></thead>
+            <tbody id="results"></tbody>
+          </table>
+        </div>
+      </div>
+      <div>
+        <p class="kicker">Stilling</p>
+        <h2>Pulje (klubbens tal)</h2>
+        <p class="form-note">Opdateres i data.js, indtil DAI-iframen tager over.</p>
+        <div class="table-wrap" style="margin-top:16px">
+          <table>
+            <thead><tr><th>#</th><th>Hold</th><th>K</th><th>V</th><th>U</th><th>T</th><th>Mål</th><th>P</th></tr></thead>
+            <tbody id="table"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="site-footer"></div>
+  <script src="js/config.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
