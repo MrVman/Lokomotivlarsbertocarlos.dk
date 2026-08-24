@@ -28,6 +28,20 @@ window.LLC_DATA = {
     { name: "Ropstad", pos: "Angreb", number: 17, license: "33", since: 2026 },
   ],
 
+  awardsLatest: [
+    { title: "Årets spiller", name: "Zaki" },
+    { title: "Årets fighter", name: "Bisgaard" },
+    { title: "Årets mål", name: "Verner" },
+    { title: "Årets afbrænder", name: "Zeko" },
+    { title: "Årets jubelscene", name: "Anders" },
+    { title: "Årets keeper", name: "Zaki" },
+    { title: "Årets assist", name: "Bisgaard" },
+    { title: "Årets plæneklipper", name: "Rost" },
+    { title: "Årets åbenbaring", name: "P" },
+    { title: "Årets Lars", name: "Jakob" },
+    { title: "Årets topscorer", name: "Jakob" },
+  ],
+
   hallOfFame: [
     {
       year: "2016",
@@ -48,6 +62,11 @@ window.LLC_DATA = {
       year: "2018",
       title: "Første Award Show",
       text: "Galla i sort og rødt. Årets Spiller, Mål, Assist og Lars blev uddelt under røde lamper.",
+    },
+    {
+      year: "2025",
+      title: "Award Show",
+      text: "Rekordmange omstemninger. Årets spiller: Zaki. Årets Lars og topscorer: Jakob. Årets fighter og assist: Bisgaard.",
     },
     {
       year: "2026",
@@ -163,6 +182,17 @@ window.LLC_DATA = {
   ],
 
   gallery: [
+    {
+      title: "Award Show — seneste galla",
+      cat: "award",
+      year: "2025",
+      date: "2025-11-01",
+      opponent: "Galla",
+      result: null,
+      excerpt: "Rekordmange omstemninger og overlæggerafgørelser. Årets spiller: Zaki. Årets Lars og topscorer: Jakob. Årets fighter: Bisgaard. Årets mål: Verner.",
+      url: "https://www.instagram.com/p/DRZvgWZDcKD/",
+      tags: "#awardshow",
+    },
     {
       title: "Målfest: 10–4",
       cat: "kamp",

@@ -26,6 +26,34 @@
       .sort((a, b) => a.date.localeCompare(b.date) || a.time.localeCompare(b.time))[0];
   }
 
+  function mountIgEmbed(el, permalink) {
+    if (!el || !permalink) return;
+    el.innerHTML = `<blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="${permalink}" data-instgrm-version="14"></blockquote>`;
+    function process() {
+      if (window.instgrm && window.instgrm.Embeds) window.instgrm.Embeds.process();
+    }
+    if (window.instgrm && window.instgrm.Embeds) process();
+    else if (!document.getElementById("ig-embed-js")) {
+      const s = document.createElement("script");
+      s.id = "ig-embed-js";
+      s.async = true;
+      s.src = "https://www.instagram.com/embed.js";
+      s.onload = process;
+      document.body.appendChild(s);
+    }
+  }
+
+  function renderAwards() {
+    const list = document.getElementById("award-winners");
+    if (list) {
+      list.innerHTML = (D().awardsLatest || [])
+        .map((a) => `<li><span>${a.title}</span><strong>${a.name}</strong></li>`)
+        .join("");
+    }
+    const permalink = C().awardShowPermalink;
+    document.querySelectorAll("[data-ig-embed]").forEach((el) => mountIgEmbed(el, permalink));
+  }
+
   function renderHome() {
     const next = nextFixture();
     const el = document.getElementById("next-match");
@@ -292,6 +320,7 @@
 
   document.addEventListener("DOMContentLoaded", () => {
     const page = document.body.dataset.page;
+    renderAwards();
     if (page === "home") renderHome();
     if (page === "hold") renderHold();
     if (page === "om") renderOm();
