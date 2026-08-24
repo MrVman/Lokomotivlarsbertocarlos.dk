@@ -10,8 +10,8 @@ window.LLC_CONFIG = {
   city: "Valby",
   domain: "https://lokomotivlarsbertocarlos.dk",
 
-  email: "kontakt@lokomotivlarsbertocarlos.dk",
-  phone: "",
+  email: "rasvaernet@gmail.com",
+  phone: "+4522419193",
   address: "Valby Idrætspark 7, Julius Andersensvej 1, 2450 København SV",
   addressShort: "Valby Idrætspark, 2450 København SV",
 
@@ -19,7 +19,7 @@ window.LLC_CONFIG = {
   instagramUrl: "https://www.instagram.com/larsbertocarlos/",
   instagramEmbed: "",
 
-  googleCalendarId: "",
+  googleCalendarId: "webcal://www.holdsport.dk/activities.ics?hide_pickup_time=true&token=exiJ7Su3cYAGRcJlqm%2Bsqg%3D%3D&v=1",
   googleCalendarTz: "Europe/Copenhagen",
 
   daiClubId: "1457",
@@ -29,11 +29,11 @@ window.LLC_CONFIG = {
     "https://resultater.dai-sport.dk/tms/Turneringer-og-resultater/Spillested-Information.aspx?SpillestedsId=974",
   daiIframeUrl: "",
 
-  holdsportUrl: "",
+  holdsportUrl: "https://www.holdsport.dk/activities",
   holdsportWidget: "",
   teamsboxUrl: "",
 
-  memberPassword: "llc2016",
+  memberPassword: "ChuChu",
   memberSessionHours: 12,
 
   formEndpoint: "",
