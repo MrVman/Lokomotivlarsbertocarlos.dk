@@ -522,3 +522,10 @@ input:focus, textarea:focus, select:focus {
   .award-list { grid-template-columns: 1fr 1fr; }
   .gala-program { padding: 20px 16px 24px; }
 }
+
+.kit-reveal { margin-top: var(--space-7); }
+.kit-reveal h3 { font-size: var(--text-xl); text-transform: uppercase; margin-bottom: 16px; }
+.kit-reveal-video {
+  width: 100%; border-radius: var(--radius-lg); border: 1px solid var(--border);
+  background: #000; aspect-ratio: 16/9; object-fit: cover;
+}
