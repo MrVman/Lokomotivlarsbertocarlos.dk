@@ -12,11 +12,18 @@
     });
   }
 
+  function scoreParts(result) {
+    if (!result || !/–/.test(result)) return null;
+    const [a, b] = result.split("–").map((n) => Number(n.trim()));
+    if (Number.isNaN(a) || Number.isNaN(b)) return null;
+    return [a, b];
+  }
+
   function nextFixture() {
     const today = new Date().toISOString().slice(0, 10);
     return (D().fixtures || [])
-      .filter((f) => !f.result && f.date >= today)
-      .sort((a, b) => a.date.localeCompare(b.date))[0];
+      .filter((f) => !f.result && !f.cancelled && f.date >= today)
+      .sort((a, b) => a.date.localeCompare(b.date) || a.time.localeCompare(b.time))[0];
   }
 
   function renderHome() {
@@ -52,7 +59,7 @@
   function renderHold() {
     const box = document.getElementById("squad");
     if (!box) return;
-    const groups = ["Målmand", "Forsvar", "Midtbane", "Angreb", "Utility"];
+    const groups = ["Målmand", "Wing Back", "Forsvar", "Midtbane", "Angreb", "Utility"];
     box.innerHTML = groups
       .map((g) => {
         const players = (D().squad || []).filter((p) => p.pos === g);
@@ -112,7 +119,8 @@
     const fixtures = D().fixtures || [];
     if (upcoming) {
       upcoming.innerHTML = fixtures
-        .filter((f) => !f.result)
+        .filter((f) => f.season === "efterar" && !f.cancelled)
+        .sort((a, b) => a.date.localeCompare(b.date) || a.time.localeCompare(b.time))
         .map(
           (f) => `<tr>
             <td>${fmtDate(f.date)} · ${f.time}</td>
@@ -125,17 +133,22 @@
     }
     if (results) {
       results.innerHTML = fixtures
-        .filter((f) => f.result)
-        .sort((a, b) => b.date.localeCompare(a.date))
+        .filter((f) => f.season === "forar")
+        .sort((a, b) => a.date.localeCompare(b.date) || a.time.localeCompare(b.time))
         .map((f) => {
-          const [a, b] = f.result.split("–").map((n) => Number(n.trim()));
-          const us = f.home ? a : b;
-          const them = f.home ? b : a;
-          const cls = us > them ? "tag-won" : us < them ? "tag-lost" : "";
+          const parts = scoreParts(f.result);
+          let cls = "";
+          if (parts) {
+            const us = f.home ? parts[0] : parts[1];
+            const them = f.home ? parts[1] : parts[0];
+            cls = us > them ? "tag-won" : us < them ? "tag-lost" : "";
+          }
+          const label = f.result || f.note || "—";
+          const extra = f.result && f.note ? ` <span class="form-note">${f.note}</span>` : "";
           return `<tr>
             <td>${fmtDate(f.date)}</td>
             <td>${f.home ? "LLC" : f.opponent} – ${f.home ? f.opponent : "LLC"}</td>
-            <td class="${cls}"><strong>${f.result}</strong></td>
+            <td class="${cls}"><strong>${label}</strong>${extra}</td>
           </tr>`;
         })
         .join("");
@@ -145,7 +158,7 @@
         .map(
           (r) => `<tr class="${r.team.includes("Lokomotiv") ? "is-us" : ""}">
             <td>${r.pos}</td><td>${r.team}</td><td>${r.p}</td><td>${r.w}</td>
-            <td>${r.d}</td><td>${r.l}</td><td>${r.gf}-${r.ga}</td><td><strong>${r.pts}</strong></td>
+            <td>${r.d}</td><td>${r.l}</td><td>${r.gf}–${r.ga}</td><td><strong>${r.pts}</strong></td>
           </tr>`
         )
         .join("");
