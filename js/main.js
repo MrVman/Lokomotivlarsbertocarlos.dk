@@ -47,7 +47,12 @@
     const list = document.getElementById("award-winners");
     if (list) {
       list.innerHTML = (D().awardsLatest || [])
-        .map((a) => `<li><span>${a.title}</span><strong>${a.name}</strong></li>`)
+        .map(
+          (a) => `<li>
+            <span>${a.title}</span>
+            <strong>${a.name}</strong>
+          </li>`
+        )
         .join("");
     }
     const permalink = C().awardShowPermalink;

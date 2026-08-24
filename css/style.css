@@ -14,6 +14,8 @@
   --border-strong: color-mix(in oklab, var(--fg) 22%, transparent);
   --kit-blue: #1e4b9e;
   --kit-yellow: #d4a017;
+  --gold: #e0c078;
+  --gold-deep: #a37c2c;
   --kit-white: #f3efe8;
   --success: #3f8f6b;
   --font-display: "Oswald", "Arial Narrow", sans-serif;
@@ -407,27 +409,112 @@ input:focus, textarea:focus, select:focus {
   }
 }
 
-.award-split {
+.gala {
+  position: relative;
+  padding: var(--space-8) 0;
+  background:
+    radial-gradient(ellipse at 50% 0%, color-mix(in oklab, var(--gold) 18%, transparent), transparent 55%),
+    linear-gradient(180deg, #1a0c10 0%, #0c0c0d 42%, #12080b 100%);
+  overflow: hidden;
+}
+.gala-nested {
+  margin-top: var(--space-6);
+  padding: var(--space-6) var(--space-4);
+  border-radius: var(--radius-lg);
+}
+.gala-stripes {
+  position: absolute; inset: 0 auto auto 0; width: 100%; height: 10px;
+  background: repeating-linear-gradient(90deg, var(--red) 0 16px, var(--ink) 16px 32px);
+}
+.gala-stripes::after {
+  content: "";
+  position: absolute; left: 0; right: 0; top: 10px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+.gala-ticket {
+  display: grid; justify-items: center; text-align: center; gap: 8px;
+  margin: 0 auto var(--space-7); max-width: 520px;
+  padding: 22px 28px;
+  border: 1px solid color-mix(in oklab, var(--gold) 55%, transparent);
+  background:
+    repeating-linear-gradient(90deg, color-mix(in oklab, var(--red) 14%, transparent) 0 10px, transparent 10px 22px),
+    color-mix(in oklab, #1a1012 88%, var(--gold));
+  box-shadow: 0 0 0 6px color-mix(in oklab, var(--ink) 70%, transparent), 0 24px 50px rgba(0,0,0,.35);
+}
+.gala-ticket span {
+  font-family: var(--font-display); letter-spacing: 0.22em; text-transform: uppercase;
+  font-size: 0.72rem; color: var(--gold);
+}
+.gala-ticket strong {
+  font-family: var(--font-display); font-size: clamp(2.2rem, 6vw, 4rem);
+  letter-spacing: 0.08em; text-transform: uppercase; line-height: 0.9;
+  color: var(--cream);
+  text-shadow: 0 0 24px color-mix(in oklab, var(--gold) 45%, transparent);
+}
+.gala-stage {
   display: grid;
-  grid-template-columns: minmax(280px, 540px) 1fr;
+  grid-template-columns: minmax(280px, 0.95fr) minmax(280px, 1.05fr);
   gap: var(--space-6);
   align-items: start;
 }
-.ig-embed { max-width: 540px; width: 100%; }
-.ig-embed-wide { margin: 0 auto var(--space-6); }
-.ig-embed iframe, .ig-embed blockquote { max-width: 100% !important; }
+.gala-stage-compact { margin-bottom: var(--space-6); }
+.gala-frame {
+  margin: 0;
+  padding: 12px 12px 16px;
+  background: linear-gradient(180deg, color-mix(in oklab, var(--gold) 35%, #2a1a12), #120c0c);
+  border: 1px solid var(--gold);
+  box-shadow:
+    0 0 0 1px color-mix(in oklab, var(--ink) 50%, transparent),
+    0 28px 50px rgba(0,0,0,.45);
+}
+.gala-frame::before {
+  content: "Live fra gallaen";
+  display: block; text-align: center;
+  font-family: var(--font-display); letter-spacing: 0.2em; text-transform: uppercase;
+  font-size: 0.7rem; color: var(--ink); background: var(--gold);
+  margin: -12px -12px 12px; padding: 8px 10px;
+}
+.ig-embed { width: 100%; max-width: 540px; margin-inline: auto; }
+.ig-embed iframe, .ig-embed blockquote { max-width: 100% !important; margin: 0 auto !important; }
+.gala-program {
+  padding: 28px 28px 32px;
+  background: color-mix(in oklab, var(--bg-elevated) 92%, var(--gold));
+  border: 1px solid color-mix(in oklab, var(--gold) 35%, transparent);
+  box-shadow: 0 24px 48px rgba(0,0,0,.3);
+}
+.gala-program-kicker {
+  font-family: var(--font-display); letter-spacing: 0.22em; text-transform: uppercase;
+  font-size: 0.72rem; color: var(--gold); margin-bottom: 8px;
+}
+.gala-program h2 {
+  font-size: var(--text-2xl); text-transform: uppercase; margin-bottom: 8px;
+  color: var(--cream);
+}
+.gala-program .lede { color: var(--fg-muted); margin-bottom: 20px; }
+.gala-program .btn { margin-top: 22px; }
 .award-list {
-  list-style: none; margin: 12px 0 0; padding: 0;
-  display: grid; gap: 8px;
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
 }
 .award-list li {
-  display: flex; justify-content: space-between; gap: 16px;
-  padding: 10px 0; border-bottom: 1px solid var(--border);
-  font-size: var(--text-sm);
+  display: flex; flex-direction: column; gap: 4px;
+  padding: 12px 14px;
+  background: color-mix(in oklab, var(--ink) 45%, transparent);
+  border-top: 2px solid var(--gold);
 }
-.award-list span { color: var(--fg-subtle); }
-.award-list strong { font-family: var(--font-display); letter-spacing: 0.06em; text-transform: uppercase; }
-@media (max-width: 800px) {
-  .award-split { grid-template-columns: 1fr; }
-  .ig-embed { margin-inline: auto; }
+.award-list span {
+  font-family: var(--font-display); letter-spacing: 0.12em; text-transform: uppercase;
+  font-size: 0.65rem; color: var(--gold);
+}
+.award-list strong {
+  font-family: var(--font-display); letter-spacing: 0.04em; text-transform: uppercase;
+  font-size: 1.15rem; color: var(--cream);
+}
+@media (max-width: 900px) {
+  .gala-stage { grid-template-columns: 1fr; }
+  .gala-frame { max-width: 540px; margin-inline: auto; }
+}
+@media (max-width: 560px) {
+  .award-list { grid-template-columns: 1fr 1fr; }
+  .gala-program { padding: 20px 16px 24px; }
 }
