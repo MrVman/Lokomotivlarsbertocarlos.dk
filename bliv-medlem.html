@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bliv medlem — Lokomotiv Larsbertocarlos</title>
+  <meta name="description" content="Ansøg om medlemskab med en e-mail. Rekruttering i Lokomotiv Larsbertocarlos er privat.">
+  <meta name="theme-color" content="#0c0c0d">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Oswald:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="medlem-ansog">
+  <div id="site-header"></div>
+  <header class="page-hero">
+    <div class="wrap">
+      <p class="kicker">Perronen</p>
+      <h1>Bliv medlem</h1>
+      <p class="lede">Rekruttering er privat. Vi tager ikke åbne prøvetræninger. Hvis du kender nogen i klubben — eller bare vil skrive — så send en mail. Resten kører i Holdsport.</p>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="wrap split">
+      <div>
+        <h2>Kun e-mail</h2>
+        <p>Ingen blanket, ingen kontingent-kasse her på siden. Bestyrelsen svarer, og hvis det giver mening, får du et Holdsport-link og en tid i Valby.</p>
+        <ul>
+          <li>Amatørfodbold i DAI</li>
+          <li>Træning i Valby Idrætspark</li>
+          <li>Medlemsportal, når du er inde</li>
+        </ul>
+        <p class="notice">Har du allerede login? Gå til <a href="medlem/login.html">medlemsportalen</a>.</p>
+      </div>
+      <div class="card">
+        <form data-llc-form>
+          <input type="hidden" name="subject" value="Medlemsansøgning">
+          <label>Navn<input name="navn" required autocomplete="name"></label>
+          <label>E-mail<input name="email" type="email" required autocomplete="email"></label>
+          <label>Fødselsår<input name="aar" inputmode="numeric" placeholder="valgfrit"></label>
+          <label>Hvem kender du i klubben? / kort om dig
+            <textarea name="besked" required></textarea>
+          </label>
+          <button class="btn btn-primary" type="submit">Send ansøgning</button>
+        </form>
+        <div class="form-ok">Modtaget. Vi skriver tilbage på mail.</div>
+      </div>
+    </div>
+  </section>
+
+  <div id="site-footer"></div>
+  <script src="js/config.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

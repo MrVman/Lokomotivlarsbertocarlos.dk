@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Shop — Lokomotiv Larsbertocarlos</title>
+  <meta name="description" content="Klubshop under opbygning. Trøje, halstørklæde og Award Show-plakat.">
+  <meta name="theme-color" content="#0c0c0d">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Oswald:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="shop">
+  <div id="site-header"></div>
+  <header class="page-hero">
+    <div class="wrap">
+      <p class="kicker">Webshop</p>
+      <h1>Striberne, når de er til salg</h1>
+      <p class="lede">Strukturen er klar: produkter i data.js, knap der kan bindes til Snipcart. Indtil <code>shopEnabled</code> er true, er det et udstillingsvindue.</p>
+    </div>
+  </header>
+  <section class="section">
+    <div class="wrap">
+      <p class="notice">Ingen betaling er aktiv. Sæt <code>shopEnabled: true</code> og en Snipcart-nøgle i config.js, når lageret er på plads.</p>
+      <div class="grid-4" id="shop-grid" style="margin-top:24px"></div>
+    </div>
+  </section>
+  <div id="site-footer"></div>
+  <script src="js/config.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

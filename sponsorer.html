@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sponsorer — Lokomotiv Larsbertocarlos</title>
+  <meta name="description" content="Bliv sponsor i Lokomotiv Larsbertocarlos. Pakker fra ven til hovedsponsor.">
+  <meta name="theme-color" content="#0c0c0d">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Oswald:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="sponsorer">
+  <div id="site-header"></div>
+  <header class="page-hero">
+    <div class="wrap">
+      <p class="kicker">Samarbejde</p>
+      <h1>Sponsorer</h1>
+      <p class="lede">Logopladserne er tomme, indtil nogen tager dem. Pakkerne er en start — skriv, så finder vi et spor der passer.</p>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="grid-4" id="sponsors"></div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="wrap split">
+      <div>
+        <p class="kicker">Kontakt</p>
+        <h2>Bliv en del af toget</h2>
+        <p>Trøjer, hjemmeside, Award Show-program og en hilsen i Holdsport. Vi er en lille klub, så I får mennesker, ikke et mediehus.</p>
+        <p class="form-note">Formularen sender til klubmail, indtil et Formspree-endpoint sættes i config.js.</p>
+      </div>
+      <div class="card">
+        <form data-llc-form>
+          <input type="hidden" name="subject" value="Sponsorhenvendelse">
+          <label>Navn / firma<input name="navn" required autocomplete="organization"></label>
+          <label>E-mail<input name="email" type="email" required autocomplete="email"></label>
+          <label>Hvad tænker I?<textarea name="besked" required placeholder="Trøje, hjemmeside, event …"></textarea></label>
+          <button class="btn btn-primary" type="submit">Send</button>
+        </form>
+        <div class="form-ok">Tak. Vi vender tilbage.</div>
+      </div>
+    </div>
+  </section>
+
+  <div id="site-footer"></div>
+  <script src="js/config.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/layout.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
