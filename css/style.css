@@ -526,49 +526,37 @@ input:focus, textarea:focus, select:focus {
 .gift-wrap { display: grid; place-items: center; }
 .gift-box {
   position: relative;
-  width: min(420px, 100%);
-  aspect-ratio: 1.15;
+  width: min(440px, 100%);
+  padding: 0;
   border: 0;
+  background: transparent;
   color: var(--cream);
   cursor: pointer;
-  background:
-    repeating-linear-gradient(90deg, var(--red) 0 28px, var(--ink) 28px 56px);
-  box-shadow:
-    0 18px 0 color-mix(in oklab, var(--ink) 80%, var(--red)),
-    0 28px 50px rgba(0,0,0,.45);
-  transition: transform var(--motion-quick) var(--ease-out);
+  filter: drop-shadow(0 0 24px color-mix(in oklab, var(--red) 45%, transparent));
+  animation: crate-pulse 2.4s ease-in-out infinite;
 }
-.gift-box:hover, .gift-box:focus-visible { transform: translateY(-6px) rotate(-1deg); }
-.gift-box::before, .gift-box::after {
-  content: ""; position: absolute; background: var(--gold);
+.gift-box img {
+  width: 100%; aspect-ratio: 1; object-fit: cover;
+  border-radius: 8px;
+  display: block;
 }
-.gift-box::before {
-  left: 50%; top: 0; bottom: 0; width: 28px; transform: translateX(-50%);
+.gift-box:hover, .gift-box:focus-visible {
+  transform: translateY(-6px) scale(1.02);
+  filter: drop-shadow(0 0 36px color-mix(in oklab, var(--red) 70%, transparent));
 }
-.gift-box::after {
-  top: 42%; left: 0; right: 0; height: 28px;
-}
-.gift-bow {
-  position: absolute; left: 50%; top: 28%;
-  width: 86px; height: 52px; transform: translate(-50%, -50%);
-  background:
-    radial-gradient(circle at 30% 50%, var(--gold) 0 18px, transparent 19px),
-    radial-gradient(circle at 70% 50%, var(--gold) 0 18px, transparent 19px);
-  z-index: 2;
-}
-.gift-lid {
-  position: absolute; inset: 0 0 auto; height: 22%;
-  background: color-mix(in oklab, var(--ink) 35%, var(--red));
-  box-shadow: inset 0 -2px 0 var(--gold);
+@keyframes crate-pulse {
+  0%, 100% { filter: drop-shadow(0 0 18px color-mix(in oklab, var(--red) 35%, transparent)); }
+  50% { filter: drop-shadow(0 0 40px color-mix(in oklab, var(--red) 80%, transparent)); }
 }
 .gift-tag {
   position: absolute; left: 50%; bottom: 18px; transform: translateX(-50%);
-  width: calc(100% - 40px);
-  padding: 14px 16px 16px;
-  background: var(--ink);
+  width: calc(100% - 48px);
+  padding: 12px 16px 14px;
+  background: color-mix(in oklab, var(--ink) 88%, transparent);
   border: 1px solid var(--gold);
   z-index: 3;
   text-align: center;
+  backdrop-filter: blur(6px);
 }
 .gift-tag .kicker { color: var(--gold); margin-bottom: 4px; }
 .gift-tag strong {
