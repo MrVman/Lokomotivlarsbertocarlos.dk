@@ -59,6 +59,43 @@
     document.querySelectorAll("[data-ig-embed]").forEach((el) => mountIgEmbed(el, permalink));
   }
 
+  function renderKitReel() {
+    const video = document.getElementById("kit-reel");
+    if (!video) return;
+    const clips = [
+      "assets/video/reveal-01.mp4",
+      "assets/video/reveal-02.mp4",
+      "assets/video/reveal-03.mp4",
+    ];
+    let i = 0;
+    const dots = document.getElementById("reel-dots");
+    if (dots) {
+      dots.innerHTML = clips.map(() => `<button type="button" aria-label="Klip"></button>`).join("");
+    }
+    function paint() {
+      if (!dots) return;
+      [...dots.children].forEach((d, n) => d.classList.toggle("is-on", n === i));
+    }
+    function load() {
+      video.src = clips[i];
+      paint();
+      video.play().catch(() => {});
+    }
+    video.addEventListener("ended", () => {
+      i = (i + 1) % clips.length;
+      load();
+    });
+    if (dots) {
+      dots.addEventListener("click", (e) => {
+        const b = e.target.closest("button");
+        if (!b) return;
+        i = [...dots.children].indexOf(b);
+        load();
+      });
+    }
+    load();
+  }
+
   function renderHome() {
     const next = nextFixture();
     const el = document.getElementById("next-match");
@@ -327,7 +364,7 @@
   document.addEventListener("DOMContentLoaded", () => {
     const page = document.body.dataset.page;
     renderAwards();
-    if (page === "home") renderHome();
+    if (page === "home") { renderHome(); renderKitReel(); }
     if (page === "hold") renderHold();
     if (page === "om") renderOm();
     if (page === "kampe") renderKampe();
