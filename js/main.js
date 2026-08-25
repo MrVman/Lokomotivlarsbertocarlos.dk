@@ -60,40 +60,29 @@
   }
 
   function renderKitReel() {
+    const gift = document.getElementById("open-gift");
+    const dialog = document.getElementById("gift-dialog");
     const video = document.getElementById("kit-reel");
-    if (!video) return;
-    const clips = [
-      "assets/video/reveal-01.mp4",
-      "assets/video/reveal-02.mp4",
-      "assets/video/reveal-03.mp4",
-    ];
-    let i = 0;
-    const dots = document.getElementById("reel-dots");
-    if (dots) {
-      dots.innerHTML = clips.map(() => `<button type="button" aria-label="Klip"></button>`).join("");
+    const close = document.getElementById("close-gift");
+    if (!gift || !dialog || !video) return;
+
+    function openGift() {
+      dialog.showModal();
+      video.muted = false;
+      video.currentTime = 0;
+      const play = video.play();
+      if (play && play.catch) play.catch(() => {});
     }
-    function paint() {
-      if (!dots) return;
-      [...dots.children].forEach((d, n) => d.classList.toggle("is-on", n === i));
+    function shut() {
+      video.pause();
+      dialog.close();
     }
-    function load() {
-      video.src = clips[i];
-      paint();
-      video.play().catch(() => {});
-    }
-    video.addEventListener("ended", () => {
-      i = (i + 1) % clips.length;
-      load();
+    gift.addEventListener("click", openGift);
+    if (close) close.addEventListener("click", shut);
+    dialog.addEventListener("click", (e) => {
+      if (e.target === dialog) shut();
     });
-    if (dots) {
-      dots.addEventListener("click", (e) => {
-        const b = e.target.closest("button");
-        if (!b) return;
-        i = [...dots.children].indexOf(b);
-        load();
-      });
-    }
-    load();
+    dialog.addEventListener("close", () => video.pause());
   }
 
   function renderHome() {

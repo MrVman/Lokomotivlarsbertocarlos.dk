@@ -66,20 +66,25 @@
   </section>
 
   <section class="section" id="striberne">
-    <div class="wrap">
-      <div class="section-head">
-        <div>
-          <p class="kicker">2026 · Jersey reveal</p>
-          <h2>Striberne</h2>
-          <p class="lede">Fra de gamle sæt til Hummel rød/sort. Tre klip, ét vindue.</p>
-        </div>
-      </div>
-      <div class="reel-window">
-        <video id="kit-reel" muted autoplay playsinline></video>
-        <div class="reel-dots" id="reel-dots"></div>
-      </div>
+    <div class="wrap gift-wrap">
+      <button type="button" class="gift-box" id="open-gift" aria-haspopup="dialog">
+        <span class="gift-bow" aria-hidden="true"></span>
+        <span class="gift-lid" aria-hidden="true"></span>
+        <span class="gift-tag">
+          <span class="kicker">2026</span>
+          <strong>En gave til toget</strong>
+          <em>Klik for at åbne</em>
+        </span>
+      </button>
     </div>
   </section>
+  <dialog class="gift-dialog" id="gift-dialog">
+    <div class="gift-dialog-bar">
+      <p>Striberne · Jersey reveal</p>
+      <button type="button" class="btn btn-ghost" id="close-gift">Luk</button>
+    </div>
+    <video id="kit-reel" controls playsinline preload="metadata" poster="assets/img/kits/current.jpg" src="assets/video/reveal-01.mp4"></video>
+  </dialog>
 
   <section class="section">
     <div class="wrap">
