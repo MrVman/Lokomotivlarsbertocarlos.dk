@@ -65,7 +65,7 @@
           <td>${d.title}</td>
           <td>${d.date}</td>
           <td>${d.kind.toUpperCase()}</td>
-          <td>${d.file === "#" ? "<span class='form-note'>Læg filen i /medlem/docs og ret data.js</span>" : `<a href="${d.file}">Hent</a>`}</td>
+          <td>${d.file === "#" ? "—" : `<a href="${d.file}">Hent</a>`}</td>
         </tr>`
       )
       .join("");
