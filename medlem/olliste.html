@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ølliste — LLC</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#0c0c0d">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Oswald:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .beer-next { margin-bottom: 24px; border-color: color-mix(in oklab, var(--red) 45%, var(--border)); }
+    .beer-next h3 { font-size: 2rem; margin: 4px 0 8px; }
+    .beer-lars { font-weight: 600; }
+    tr.is-past { opacity: 0.55; }
+    tr.is-off { opacity: 0.45; text-decoration: line-through; }
+    tr.is-off .tag-lost { text-decoration: none; font-weight: 600; }
+    .table-scroll { margin-top: 4px; }
+  </style>
+</head>
+<body data-page="portal-beer">
+  <div id="site-header"></div>
+  <header class="page-hero">
+    <div class="wrap">
+      <p class="kicker">Kampvagt</p>
+      <h1>Ølliste</h1>
+      <p class="lede">Kolde øl og rent tøj med til kamp. Hvem der har Lars-vagten i hver runde.</p>
+    </div>
+  </header>
+  <section class="section">
+    <div class="wrap">
+      <nav class="portal-nav">
+        <a href="index.html">Overblik</a>
+        <a href="spillere.html">Numre & licenser</a>
+        <a href="dokumenter.html">Dokumenter</a>
+        <a href="holdsport.html">Holdsport</a>
+        <a href="opslagstavle.html">Opslagstavle</a>
+        <a href="boder.html">Bøder</a>
+        <a href="olliste.html" aria-current="page">Ølliste</a>
+        <button class="btn btn-ghost" type="button" id="logout-btn">Log ud</button>
+      </nav>
+      <div class="beer-next card" id="beer-next"></div>
+      <p class="notice" style="margin:20px 0">Aflyste og spillede kampe er markeret. Originalen kan hentes som PDF.</p>
+      <p style="margin:0 0 16px"><a class="btn btn-primary" href="docs/olliste-2026.pdf" download="olliste-2026.pdf">Hent PDF</a></p>
+      <div class="table-wrap table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Runde</th>
+              <th>Dag</th>
+              <th>Dato</th>
+              <th>Lars</th>
+              <th>Hjemmehold</th>
+              <th>Udehold</th>
+            </tr>
+          </thead>
+          <tbody id="beer-rows"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  <div id="site-footer"></div>
+  <script src="../js/config.js"></script>
+  <script src="../js/data.js"></script>
+  <script src="../js/layout.js"></script>
+  <script src="../js/portal.js"></script>
+</body>
+</html>
