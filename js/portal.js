@@ -60,14 +60,18 @@
     const tb = document.getElementById("doc-rows");
     if (!tb) return;
     tb.innerHTML = (window.LLC_DATA.documents || [])
-      .map(
-        (d) => `<tr>
-          <td>${d.title}</td>
+      .map((d) => {
+        const href = d.file && d.file !== "#" ? d.file : "";
+        const open = href
+          ? `<a href="${href}" target="_blank" rel="noopener">Åbn</a>`
+          : "—";
+        return `<tr class="${href ? "doc-row" : ""}">
+          <td>${href ? `<a href="${href}" target="_blank" rel="noopener">${d.title}</a>` : d.title}</td>
           <td>${d.date}</td>
-          <td>${d.kind.toUpperCase()}</td>
-          <td>${d.file === "#" ? "—" : `<a href="${d.file}">Hent</a>`}</td>
-        </tr>`
-      )
+          <td>${(d.kind || "").toUpperCase()}</td>
+          <td>${open}</td>
+        </tr>`;
+      })
       .join("");
   }
 
@@ -115,23 +119,34 @@
   function renderFines() {
     const tb = document.getElementById("fine-rows");
     if (!tb) return;
-    tb.innerHTML = (window.LLC_DATA.fines || [])
-      .map(
-        (f) => `<tr>
+    const list = window.LLC_DATA.fines || [];
+    const isTypes = list.length && list[0].name;
+    tb.innerHTML = list
+      .map((f) => {
+        if (isTypes) {
+          const unit = f.unit || "kr";
+          return `<tr>
+            <td>${f.name}</td>
+            <td>${f.amount ? f.amount + " " + unit : "—"}</td>
+            <td>${f.note || ""}</td>
+          </tr>`;
+        }
+        return `<tr>
           <td>${f.player}</td>
           <td>${f.reason}${f.note ? " — " + f.note : ""}</td>
           <td>${f.amount ? f.amount + " kr" : "—"}</td>
           <td>${f.paid ? "Betalt" : "Åben"}</td>
           <td>${f.date}</td>
-        </tr>`
-      )
+        </tr>`;
+      })
       .join("");
     const link = document.getElementById("teamsbox-link");
     if (link) {
-      const url = cfg().teamsboxUrl;
+      const url = cfg().teamsboxUrl || cfg().holdsportUrl;
       if (url) {
         link.href = url;
         link.hidden = false;
+        if (!cfg().teamsboxUrl) link.textContent = "Åbn Holdsport";
       }
     }
   }
