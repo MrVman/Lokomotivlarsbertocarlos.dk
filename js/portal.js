@@ -43,11 +43,9 @@
   }
 
   function esc(s) {
-    return String(s || "")
-      .replace(/&/g, "&")
-      .replace(/</g, "<")
-      .replace(/>/g, ">")
-      .replace(/"/g, """);
+    const d = document.createElement("div");
+    d.textContent = String(s || "");
+    return d.innerHTML;
   }
 
   function renderPlayers() {
@@ -73,8 +71,8 @@
       .map((d) => {
         const href = d.file && d.file !== "#" ? d.file : "";
         const open = href
-          ? `<a href="${href}" target="_blank" rel="noopener">Åbn</a>`
-          : "—";
+          ? `<a href="${href}" target="_blank" rel="noopener">Aabn</a>`
+          : "-";
         return `<tr class="${href ? "doc-row" : ""}">
           <td>${href ? `<a href="${href}" target="_blank" rel="noopener">${d.title}</a>` : d.title}</td>
           <td>${d.date}</td>
@@ -108,7 +106,7 @@
 
   function paintBoard(box, posts) {
     if (!posts.length) {
-      box.innerHTML = `<p class="notice">Væggen er tom. Skriv det første opslag.</p>`;
+      box.innerHTML = `<p class="notice">Vaeggen er tom. Skriv det foerste opslag.</p>`;
       return;
     }
     box.innerHTML = posts.map(postHtml).join("");
@@ -158,15 +156,15 @@
           const unit = f.unit || "kr";
           return `<tr>
             <td>${f.name}</td>
-            <td>${f.amount ? f.amount + " " + unit : "—"}</td>
+            <td>${f.amount ? f.amount + " " + unit : "-"}</td>
             <td>${f.note || ""}</td>
           </tr>`;
         }
         return `<tr>
           <td>${f.player}</td>
-          <td>${f.reason}${f.note ? " — " + f.note : ""}</td>
-          <td>${f.amount ? f.amount + " kr" : "—"}</td>
-          <td>${f.paid ? "Betalt" : "Åben"}</td>
+          <td>${f.reason}${f.note ? " - " + f.note : ""}</td>
+          <td>${f.amount ? f.amount + " kr" : "-"}</td>
+          <td>${f.paid ? "Betalt" : "Aaben"}</td>
           <td>${f.date}</td>
         </tr>`;
       })
@@ -177,7 +175,7 @@
       if (url) {
         link.href = url;
         link.hidden = false;
-        if (!cfg().teamsboxUrl) link.textContent = "Åbn Holdsport";
+        if (!cfg().teamsboxUrl) link.textContent = "Aabn Holdsport";
       }
     }
   }
@@ -204,16 +202,16 @@
     const card = document.getElementById("beer-next");
     if (card) {
       if (!next) {
-        card.innerHTML = `<p class="kicker">Ølliste</p><h3>Sæsonen er kørt</h3><p>Ingen flere vagter på listen.</p>`;
+        card.innerHTML = `<p class="kicker">Olliste</p><h3>Saesonen er koert</h3><p>Ingen flere vagter paa listen.</p>`;
       } else {
         const when = next.date === today ? "I dag" : next.weekday + " " + fmtDate(next.date);
         const who = next.lars || "Ingen tildelt";
         card.innerHTML = `
-          <p class="kicker">${next.date === today ? "Dagens vagt" : "Næste vagt"}</p>
+          <p class="kicker">${next.date === today ? "Dagens vagt" : "Naeste vagt"}</p>
           <h3>${who}</h3>
           <p><strong>${when}</strong> · runde ${next.round}<br>
           ${next.home} – ${next.away}</p>
-          <p class="form-note">Kolde øl og rent tøj med til kamp.</p>`;
+          <p class="form-note">Kolde oel og rent toej med til kamp.</p>`;
       }
     }
 
@@ -230,7 +228,7 @@
         ]
           .filter(Boolean)
           .join(" ");
-        const lars = r.lars || "—";
+        const lars = r.lars || "-";
         const note = r.cancelled ? " <span class=\"tag-lost\">Aflyst</span>" : "";
         return `<tr class="${cls}">
           <td>${r.round}</td>
@@ -253,8 +251,8 @@
     }
     if (cfg().holdsportUrl) {
       box.innerHTML = `
-        <p class="lede">Klubben kører Holdsport. Åbn appen eller gå til klubbens side.</p>
-        <a class="btn btn-primary" href="${cfg().holdsportUrl}" rel="noopener">Åbn Holdsport</a>`;
+        <p class="lede">Klubben koerer Holdsport. Aabn appen eller gaa til klubbens side.</p>
+        <a class="btn btn-primary" href="${cfg().holdsportUrl}" rel="noopener">Aabn Holdsport</a>`;
       return;
     }
   }
