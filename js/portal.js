@@ -56,8 +56,8 @@
         (p) => `<tr>
           <td><strong>${p.number}</strong></td>
           <td>${p.name}${p.captain ? " (C)" : ""}</td>
-          <td>${p.pos}</td>
           <td>${p.license}</td>
+          <td>${p.pos}</td>
           <td>${p.since}</td>
         </tr>`
       )
