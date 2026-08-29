@@ -136,6 +136,68 @@
     }
   }
 
+  function fmtDate(iso) {
+    if (!iso) return "";
+    const [y, m, d] = iso.split("-");
+    return `${d}/${m}/${y}`;
+  }
+
+  function todayIso() {
+    const n = new Date();
+    const y = n.getFullYear();
+    const m = String(n.getMonth() + 1).padStart(2, "0");
+    const d = String(n.getDate()).padStart(2, "0");
+    return `${y}-${m}-${d}`;
+  }
+
+  function renderBeer() {
+    const list = window.LLC_DATA.beerList || [];
+    const today = todayIso();
+    const next = list.find((r) => !r.cancelled && r.date >= today) || null;
+
+    const card = document.getElementById("beer-next");
+    if (card) {
+      if (!next) {
+        card.innerHTML = `<p class="kicker">Ølliste</p><h3>Sæsonen er kørt</h3><p>Ingen flere vagter på listen.</p>`;
+      } else {
+        const when = next.date === today ? "I dag" : next.weekday + " " + fmtDate(next.date);
+        const who = next.lars || "Ingen tildelt";
+        card.innerHTML = `
+          <p class="kicker">${next.date === today ? "Dagens vagt" : "Næste vagt"}</p>
+          <h3>${who}</h3>
+          <p><strong>${when}</strong> · runde ${next.round}<br>
+          ${next.home} – ${next.away}</p>
+          <p class="form-note">Kolde øl og rent tøj med til kamp.</p>`;
+      }
+    }
+
+    const tb = document.getElementById("beer-rows");
+    if (!tb) return;
+    tb.innerHTML = list
+      .map((r) => {
+        const past = r.date < today;
+        const now = next && r.round === next.round && r.date === next.date;
+        const cls = [
+          r.cancelled ? "is-off" : "",
+          !r.cancelled && past ? "is-past" : "",
+          now ? "is-us" : "",
+        ]
+          .filter(Boolean)
+          .join(" ");
+        const lars = r.lars || "—";
+        const note = r.cancelled ? " <span class=\"tag-lost\">Aflyst</span>" : "";
+        return `<tr class="${cls}">
+          <td>${r.round}</td>
+          <td>${r.weekday}</td>
+          <td>${fmtDate(r.date)}</td>
+          <td class="beer-lars">${lars}${note}</td>
+          <td>${r.home}</td>
+          <td>${r.away}</td>
+        </tr>`;
+      })
+      .join("");
+  }
+
   function renderHoldsport() {
     const box = document.getElementById("holdsport");
     if (!box) return;
@@ -173,5 +235,6 @@
     if (page === "portal-board") renderBoard();
     if (page === "portal-fines") renderFines();
     if (page === "portal-holdsport") renderHoldsport();
+    if (page === "portal-beer") renderBeer();
   });
 })();
