@@ -1,9 +1,9 @@
 /**
  * Medlemsdata der overskriver placeholders i data.js.
- * Bøder fra Holdsport-skærmbilledet + Vernergult og SoMe.
- * Dokumenter peger på filer i klubbens Google Drive.
  */
 window.LLC_DATA = window.LLC_DATA || {};
+
+window.LLC_DATA.board = [];
 
 window.LLC_DATA.fines = [
   { name: "50t-reglen", amount: 50, unit: "kr", note: "" },
@@ -48,10 +48,34 @@ window.LLC_DATA.documents = [
     file: "https://drive.google.com/file/d/1eX_LO_I08CBgAfIpqiRucLZovuQHUkAU/view",
   },
   {
+    title: "Referat, generalforsamling 2021",
+    date: "2021-11-27",
+    kind: "pdf",
+    file: "https://drive.google.com/file/d/1QSv2NV5oGY46LSy2FlCgHW2Hw9CzX1iQ/view",
+  },
+  {
+    title: "Referat, generalforsamling 2020",
+    date: "2020-11-28",
+    kind: "pdf",
+    file: "https://drive.google.com/file/d/1M0CmzHhaaZxOSyrZ6MZQEbFyrY_AUJN2/view",
+  },
+  {
     title: "Generalforsamling 2018",
     date: "2018-11-01",
     kind: "doc",
     file: "https://docs.google.com/document/d/1V85zcM9kCwvg8DPyrPaep-xNSFwu45NR/view",
+  },
+  {
+    title: "Referat, generalforsamling 2018",
+    date: "2018-11-01",
+    kind: "pdf",
+    file: "https://drive.google.com/file/d/1AV7lW5WUaslyDsJeBqSXKLj3RPd5GgPf/view",
+  },
+  {
+    title: "Vedtægter 2018",
+    date: "2018-11-01",
+    kind: "pdf",
+    file: "https://drive.google.com/file/d/1Vd-otb11Pl8Zid48QksuLqUBDnAebLtn/view",
   },
   {
     title: "Referat, generalforsamling 2017",
