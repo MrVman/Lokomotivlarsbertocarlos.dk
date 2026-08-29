@@ -1,5 +1,7 @@
 (function () {
   const KEY = "llc_member_session";
+  const BOARD_KEY = "llc_board";
+  const NAME_KEY = "llc_board_name";
 
   function cfg() {
     return window.LLC_CONFIG || {};
@@ -40,6 +42,14 @@
     }
   }
 
+  function esc(s) {
+    return String(s || "")
+      .replace(/&/g, "&")
+      .replace(/</g, "<")
+      .replace(/>/g, ">")
+      .replace(/"/g, """);
+  }
+
   function renderPlayers() {
     const tb = document.getElementById("player-rows");
     if (!tb) return;
@@ -75,44 +85,65 @@
       .join("");
   }
 
+  function loadBoard() {
+    try {
+      const stored = JSON.parse(localStorage.getItem(BOARD_KEY) || "[]");
+      return Array.isArray(stored) ? stored : [];
+    } catch {
+      return [];
+    }
+  }
+
+  function saveBoard(posts) {
+    localStorage.setItem(BOARD_KEY, JSON.stringify(posts));
+  }
+
+  function postHtml(p) {
+    return `<article class="post">
+      <div class="meta">${esc(p.author)} · ${esc(p.date)}</div>
+      <h3>${esc(p.title)}</h3>
+      <p>${esc(p.body)}</p>
+    </article>`;
+  }
+
+  function paintBoard(box, posts) {
+    if (!posts.length) {
+      box.innerHTML = `<p class="notice">Væggen er tom. Skriv det første opslag.</p>`;
+      return;
+    }
+    box.innerHTML = posts.map(postHtml).join("");
+  }
+
   function renderBoard() {
     const box = document.getElementById("board");
     if (!box) return;
-    const posts = window.LLC_DATA.board || [];
-    box.innerHTML = posts
-      .map(
-        (p) => `<article class="post">
-          <div class="meta">${p.author} · ${p.date}</div>
-          <h3>${p.title}</h3>
-          <p>${p.body}</p>
-        </article>`
-      )
-      .join("");
+    const posts = loadBoard();
+    paintBoard(box, posts);
 
     const form = document.getElementById("board-form");
+    const nameInput = form?.querySelector('[name="author"]');
+    if (nameInput) {
+      nameInput.value = localStorage.getItem(NAME_KEY) || "";
+    }
     form?.addEventListener("submit", (e) => {
       e.preventDefault();
       const fd = new FormData(form);
+      const author = String(fd.get("author") || "").trim();
+      const title = String(fd.get("title") || "").trim();
+      const body = String(fd.get("body") || "").trim();
+      if (!author || !title || !body) return;
+      localStorage.setItem(NAME_KEY, author);
       const post = {
-        author: "Medlem",
+        author,
         date: new Date().toISOString().slice(0, 10),
-        title: String(fd.get("title") || "Opslag"),
-        body: String(fd.get("body") || ""),
+        title,
+        body,
       };
-      const stored = JSON.parse(localStorage.getItem("llc_board") || "[]");
-      stored.unshift(post);
-      localStorage.setItem("llc_board", JSON.stringify(stored));
+      const next = [post, ...loadBoard()];
+      saveBoard(next);
       form.reset();
-      const extra = stored
-        .map(
-          (p) => `<article class="post">
-            <div class="meta">${p.author} · ${p.date} · kun på denne enhed</div>
-            <h3>${p.title}</h3>
-            <p>${p.body}</p>
-          </article>`
-        )
-        .join("");
-      box.insertAdjacentHTML("afterbegin", extra);
+      if (nameInput) nameInput.value = author;
+      paintBoard(box, next);
     });
   }
 
