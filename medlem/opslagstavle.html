@@ -37,8 +37,9 @@
       </div>
       <div class="card">
         <h3>Nyt opslag</h3>
-        <p class="form-note">Her kan I skrive opslag på væggen.</p>
+        <p class="form-note">Opslag gemmes i denne browser, så de står der næste gang du åbner siden herfra.</p>
         <form id="board-form">
+          <label>Dit navn<input name="author" required autocomplete="name"></label>
           <label>Overskrift<input name="title" required></label>
           <label>Tekst<textarea name="body" required></textarea></label>
           <button class="btn btn-primary" type="submit">Sæt på væggen</button>
@@ -49,6 +50,7 @@
   <div id="site-footer"></div>
   <script src="../js/config.js"></script>
   <script src="../js/data.js"></script>
+  <script src="../js/portal-data.js"></script>
   <script src="../js/layout.js"></script>
   <script src="../js/portal.js"></script>
 </body>
