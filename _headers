@@ -15,5 +15,3 @@
 /medlem/*
   X-Robots-Tag: noindex
 
-/pegben/*
-  Cache-Control: public, max-age=3600
