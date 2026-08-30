@@ -1,0 +1,84 @@
+.kit-card {
+  padding: 0 0 18px;
+}
+.jersey-stage {
+  display: grid;
+  place-items: center;
+  gap: 8px;
+  min-height: 188px;
+  padding: 28px 16px 16px;
+  background:
+    radial-gradient(ellipse at 50% 20%, color-mix(in oklab, var(--red) 16%, transparent), transparent 60%),
+    var(--bg-subtle);
+}
+.kit-card .jersey {
+  width: 92px;
+  height: 108px;
+  margin: 0;
+  transform-origin: center bottom;
+  animation: jersey-idle 3.2s ease-in-out infinite;
+  filter: drop-shadow(0 10px 12px color-mix(in oklab, #000 45%, transparent));
+}
+.kit-card .shorts {
+  margin: 0;
+}
+.kit-card:hover .jersey {
+  animation: jersey-pop 0.55s ease-out forwards;
+}
+.kit-whiteblue .jersey {
+  background:
+    linear-gradient(180deg, transparent 22%, var(--kit-blue) 22% 28%, transparent 28%),
+    linear-gradient(115deg, var(--kit-white) 42%, var(--kit-blue) 42% 58%, var(--kit-white) 58%);
+}
+.kit-yellow .jersey,
+.kit-yellow .jersey::before,
+.kit-yellow .jersey::after {
+  background:
+    repeating-conic-gradient(from 0deg, var(--kit-yellow) 0 12deg, var(--kit-blue) 12deg 24deg);
+  background-size: 18px 18px;
+}
+.kit-yellow .jersey {
+  background-image:
+    repeating-linear-gradient(45deg, var(--kit-yellow) 0 8px, var(--kit-blue) 8px 16px);
+  animation: jersey-idle 3.2s ease-in-out infinite, check-shift 4s linear infinite;
+}
+.kit-yellow .shorts { background: var(--kit-white); }
+.kit-redblue .jersey {
+  background: linear-gradient(180deg, var(--red) 0 62%, var(--kit-blue) 62%);
+}
+.kit-blue .jersey,
+.kit-blue .jersey::before,
+.kit-blue .jersey::after {
+  background:
+    repeating-linear-gradient(90deg, #163a7a 0 3px, var(--kit-blue) 3px 8px);
+}
+.kit-current .jersey,
+.kit-current .jersey::before,
+.kit-current .jersey::after {
+  background: repeating-linear-gradient(90deg, var(--red) 0 10px, var(--ink) 10px 20px);
+  animation: jersey-idle 3.2s ease-in-out infinite, stripe-drift 1.4s linear infinite;
+}
+.kit-current .shorts { background: #111; }
+
+@keyframes jersey-idle {
+  0%, 100% { transform: translateY(0) rotate(-1.4deg); }
+  50% { transform: translateY(-7px) rotate(1.6deg); }
+}
+@keyframes jersey-pop {
+  0% { transform: translateY(0) rotate(0deg) scale(1); }
+  60% { transform: translateY(-14px) rotate(-8deg) scale(1.08); }
+  100% { transform: translateY(-6px) rotate(-3deg) scale(1.04); }
+}
+@keyframes stripe-drift {
+  from { background-position: 0 0; }
+  to { background-position: 20px 0; }
+}
+@keyframes check-shift {
+  from { background-position: 0 0; }
+  to { background-position: 16px 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .kit-card .jersey,
+  .kit-yellow .jersey,
+  .kit-current .jersey { animation: none; }
+}
