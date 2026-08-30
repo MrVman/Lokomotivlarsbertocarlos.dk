@@ -85,7 +85,34 @@
       content: ""; position: absolute; left: 0; top: 0.55em;
       width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
     }
-    .guide .keys { color: var(--muted); font-size: 12px; }
+    .guide .primary { width: 100%; }
+    .start-level {
+      pointer-events: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border: 1px solid var(--border);
+      background: var(--raised);
+      border-radius: 10px;
+      padding: 8px 12px;
+    }
+    .start-level span {
+      font-size: 12px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .start-level input {
+      width: 4.6rem;
+      border: 0;
+      background: transparent;
+      color: var(--fg);
+      font-family: var(--font-display);
+      font-size: 22px;
+      text-align: right;
+      outline: none;
+    }
     .primary {
       pointer-events: auto; width: min(24rem, 100%); min-height: 48px; border: 0; border-radius: 12px;
       background: var(--accent); color: var(--accent-fg); font-size: 16px; font-weight: 500;
@@ -157,7 +184,11 @@
       <section class="guide">
         <p class="kicker">Pegben</p>
         <h1>Sørøveren med ét ben</h1>
-        <button type="button" class="primary" data-act="start" data-start-hunt="true">Start jagten</button>
+        <label class="start-level">
+          <span>Bane</span>
+          <input type="number" min="1" max="99" value="1" inputmode="numeric" data-start-level aria-label="Startbane">
+        </label>
+        <button type="button" class="primary" data-act="start" data-start-hunt="true">Start spil</button>
         <p>Han jager dig i labyrinten. Løb rundt om kasserne — han hopper, så du kan snyde ham.</p>
         <ul>
           <li>Bevæg med WASD, piletaster eller fingeren</li>
@@ -195,6 +226,6 @@
     </div>
   </div>
   <script>window.PEGBEN_ASSET_BASE = "/assets/pegben";</script>
-  <script src="/js/pegben-game.js?v=8"></script>
+  <script src="/js/pegben-game.js?v=9"></script>
 </body>
 </html>
