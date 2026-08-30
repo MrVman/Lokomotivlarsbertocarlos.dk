@@ -591,3 +591,92 @@ input:focus, textarea:focus, select:focus {
 .gift-dialog video {
   display: block; width: 100%; aspect-ratio: 16/9; background: #000;
 }
+/* Pegben — skjult pirat på forsiden */
+.pegben-egg {
+  position: absolute;
+  right: max(14px, 4vw);
+  top: 22%;
+  bottom: auto;
+  z-index: 3;
+  width: 72px;
+  height: 112px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  opacity: 0.82;
+  filter: drop-shadow(0 0 10px color-mix(in oklab, var(--red) 55%, transparent)) drop-shadow(0 8px 10px rgba(0, 0, 0, 0.55));
+  cursor: pointer;
+}
+.pegben-egg img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  animation: pegben-hop 1.7s var(--ease-out) infinite;
+  transform-origin: 50% 100%;
+}
+.pegben-egg:hover,
+.pegben-egg:focus-visible {
+  opacity: 1;
+  outline: 2px solid color-mix(in oklab, var(--cream) 55%, transparent);
+  outline-offset: 4px;
+}
+.pegben-egg.is-gone {
+  visibility: hidden;
+  pointer-events: none;
+}
+.pegben-egg.is-gone img { animation: none; }
+@keyframes pegben-hop {
+  0%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-10px); }
+  65% { transform: translateY(-3px); }
+}
+.pegben-boom {
+  position: fixed;
+  z-index: 80;
+  pointer-events: none;
+  opacity: 0;
+  background: no-repeat center / contain;
+}
+.pegben-boom.is-on {
+  animation: pegben-explode 0.5s steps(1) forwards;
+}
+@keyframes pegben-explode {
+  0% { opacity: 1; background-image: url("../pegben/explode-1.png"); transform: scale(0.55); }
+  22% { background-image: url("../pegben/explode-2.png"); transform: scale(1.05); }
+  48% { background-image: url("../pegben/explode-3.png"); transform: scale(1.25); }
+  74% { background-image: url("../pegben/explode-4.png"); transform: scale(1.1); }
+  100% { opacity: 0; background-image: url("../pegben/explode-4.png"); transform: scale(0.85); }
+}
+.pegben-fs {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: #0c1014;
+}
+.pegben-fs[hidden] { display: none !important; }
+.pegben-fs iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: #0c1014;
+}
+.pegben-fs-close {
+  position: absolute;
+  top: calc(10px + env(safe-area-inset-top, 0px));
+  right: 12px;
+  z-index: 2;
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-strong);
+  background: color-mix(in oklab, var(--bg) 78%, transparent);
+  color: var(--fg);
+  font-weight: 600;
+}
+.pegben-fs-close:hover { background: var(--bg-subtle); }
+body.pegben-lock { overflow: hidden; }
+@media (prefers-reduced-motion: reduce) {
+  .pegben-egg img { animation: none; }
+  .pegben-boom.is-on { animation: none; opacity: 0; }
+}

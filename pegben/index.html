@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Pegben</title>
+  <meta name="theme-color" content="#0c1014">
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0c1014;
+      --surface: #161c22;
+      --raised: #1e262e;
+      --fg: #e8e4d9;
+      --muted: #8a9088;
+      --subtle: #5c635c;
+      --accent: #c5c9c0;
+      --accent-fg: #0c1014;
+      --danger: #8b4a3a;
+      --border: color-mix(in oklab, var(--fg) 12%, transparent);
+      --border-strong: color-mix(in oklab, var(--fg) 22%, transparent);
+      --font-display: "Fraunces", "Times New Roman", serif;
+      --font-sans: "Outfit", "Segoe UI", system-ui, sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; background: var(--bg); color: var(--fg); font-family: var(--font-sans); overflow: hidden; }
+    button { font: inherit; cursor: pointer; color: inherit; }
+    #pegben-root { position: relative; height: 100dvh; width: 100%; overflow: hidden; background: var(--bg); touch-action: none; }
+    canvas { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
+    .hud { pointer-events: none; position: absolute; inset: 0; z-index: 10; display: flex; flex-direction: column; padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left); }
+    .top { display: flex; justify-content: space-between; gap: 12px; padding: 16px; }
+    .chips { display: flex; flex-wrap: wrap; justify-content: end; gap: 8px; }
+    .chip { border: 1px solid var(--border); background: color-mix(in oklab, var(--surface) 90%, transparent); border-radius: 8px; padding: 6px 12px; }
+    .chip span { display: block; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+    .chip b { font-family: var(--font-display); font-size: 18px; font-weight: 500; }
+    .icon-btn, .act-btn {
+      pointer-events: auto; min-width: 44px; min-height: 44px; border-radius: 8px;
+      border: 1px solid var(--border); background: var(--raised); color: var(--fg);
+    }
+    .icon-btn { width: 44px; display: grid; place-items: center; }
+    .bottom { margin-top: auto; display: flex; justify-content: space-between; align-items: end; gap: 12px; padding: 16px 16px 32px; }
+    .hint { max-width: 12rem; font-size: 12px; color: var(--muted); }
+    .touch-col { pointer-events: auto; display: none; flex-direction: column; align-items: center; gap: 8px; }
+    #pegben-root[data-touch="1"] .touch-col { display: flex; }
+    #pegben-root[data-touch="1"] .kb-hint { display: none; }
+    .kb-hint { text-align: right; font-size: 12px; color: var(--subtle); }
+    .round {
+      position: relative; width: 64px; height: 64px; border-radius: 999px;
+      border: 1px solid var(--border-strong); background: var(--accent); color: var(--accent-fg);
+      display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 12px; font-weight: 500;
+    }
+    .round.ghost { width: 56px; height: 56px; background: var(--raised); color: var(--fg); }
+    .round:disabled { opacity: .4; }
+    .cd { position: absolute; inset: 0; border-radius: inherit; background: color-mix(in oklab, var(--bg) 55%, transparent); pointer-events: none; }
+    .title {
+      display: none; position: absolute; inset: 0; z-index: 20; flex-direction: column;
+    }
+    #pegben-root[data-screen="title"] .title { display: flex; }
+    .title img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+    .title-shade { position: absolute; inset: 0; background: linear-gradient(to top, var(--bg), color-mix(in oklab, var(--bg) 55%, transparent) 42%, color-mix(in oklab, var(--bg) 25%, transparent)); pointer-events: none; }
+    .title-cta { position: relative; z-index: 1; margin-top: auto; display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 20px 20px 48px; }
+    .primary {
+      pointer-events: auto; width: min(24rem, 100%); min-height: 48px; border: 0; border-radius: 12px;
+      background: var(--accent); color: var(--accent-fg); font-size: 16px; font-weight: 500;
+    }
+    .ghost {
+      pointer-events: auto; width: min(24rem, 100%); min-height: 44px; border-radius: 8px;
+      border: 1px solid var(--border); background: transparent; color: var(--fg);
+    }
+    .best { font-size: 12px; color: var(--subtle); min-height: 1em; }
+    .modal {
+      display: none; position: absolute; inset: 0; z-index: 20; align-items: center; justify-content: center;
+      background: color-mix(in oklab, var(--bg) 55%, transparent); padding: 16px 16px 96px; overflow-y: auto;
+    }
+    #pegben-root[data-screen="paused"] .modal-pause,
+    #pegben-root[data-screen="caught"] .modal-caught,
+    #pegben-root[data-screen="cleared"] .modal-cleared { display: flex; }
+    .card { width: min(24rem, 100%); border: 1px solid var(--border); background: var(--surface); border-radius: 12px; padding: 20px; display: flex; flex-direction: column; gap: 16px; }
+    .card h2 { font-family: var(--font-display); font-size: 28px; font-weight: 500; margin: 0; }
+    .card p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.5; }
+    .kicker { font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+    .kicker.danger { color: var(--danger); }
+    #pegben-root[data-screen="playing"] .play-only { display: flex; }
+    .play-only { display: none; }
+    #pegben-root[data-muted="1"] .ico-on { display: none; }
+    #pegben-root[data-muted="0"] .ico-off, #pegben-root:not([data-muted]) .ico-off { display: none; }
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <div id="pegben-root" data-screen="title" data-muted="0" data-touch="0">
+    <canvas></canvas>
+    <div class="hud">
+      <header class="top">
+        <button type="button" class="icon-btn" data-act="mute" data-mute aria-label="Slå lyd fra">
+          <svg class="ico-on" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M11 5 6 9H3v6h3l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>
+          <svg class="ico-off" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M11 5 6 9H3v6h3l5 4V5z"/><path d="m22 9-6 6M16 9l6 6"/></svg>
+        </button>
+        <div class="chips play-only">
+          <div class="chip"><span>Bane</span><b data-level>1</b></div>
+          <div class="chip"><span>Mønter</span><b data-coins>0/0</b></div>
+          <div class="chip"><span>Bomber</span><b data-bombs>0/1</b></div>
+          <button type="button" class="icon-btn" data-act="pause" aria-label="Pause">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/></svg>
+          </button>
+        </div>
+      </header>
+      <div class="bottom play-only">
+        <p class="hint" data-hint></p>
+        <p class="kb-hint">Mellemrum · hop<br>Shift · sprint<br>E · bombe</p>
+        <div class="touch-col">
+          <button type="button" class="round" data-press="jump" aria-label="Hop">
+            <span class="cd" data-jump-cd></span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m7 15 5-5 5 5"/><path d="m7 9 5-5 5 5"/></svg>
+            Hop
+          </button>
+          <div style="display:flex;gap:8px">
+            <button type="button" class="round ghost" data-press="bomb" data-bomb aria-label="Kast bombe">Bombe</button>
+            <button type="button" class="round ghost" data-press="dash" aria-label="Sprint">
+              <span class="cd" data-dash-cd></span>
+              Sprint
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="title">
+      <img src="title.png" alt="">
+      <div class="title-shade"></div>
+      <div class="title-cta">
+        <button type="button" class="primary" data-act="start" data-start-hunt="true">Start spil</button>
+        <p class="best" data-best></p>
+      </div>
+    </div>
+    <div class="modal modal-pause">
+      <section class="card">
+        <h2>Pause</h2>
+        <p>Bane <span data-pause-level>1</span> venter stadig.</p>
+        <button type="button" class="primary" data-act="pause">Fortsæt</button>
+        <button type="button" class="ghost" data-act="menu">Til start</button>
+      </section>
+    </div>
+    <div class="modal modal-caught">
+      <section class="card">
+        <p class="kicker danger" data-caught-kicker>Fanget</p>
+        <h2 data-caught-title>Pegben fik dig</h2>
+        <p data-caught-body></p>
+        <button type="button" class="primary" data-act="retry">Prøv igen</button>
+      </section>
+    </div>
+    <div class="modal modal-cleared">
+      <section class="card">
+        <p class="kicker">Kisten er din</p>
+        <h2>Bane klar</h2>
+        <p data-cleared-body></p>
+        <button type="button" class="primary" data-act="next">Bane <span data-next-level>2</span></button>
+      </section>
+    </div>
+  </div>
+  <script>window.PEGBEN_ASSET_BASE = ".";</script>
+  <script src="game.js"></script>
+</body>
+</html>
