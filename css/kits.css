@@ -25,38 +25,66 @@
 .kit-card:hover .jersey {
   animation: jersey-pop 0.55s ease-out forwards;
 }
+
+/* Navy + white V-chevron (Nike classic) */
 .kit-whiteblue .jersey {
   background:
-    linear-gradient(180deg, transparent 22%, var(--kit-blue) 22% 28%, transparent 28%),
-    linear-gradient(115deg, var(--kit-white) 42%, var(--kit-blue) 42% 58%, var(--kit-white) 58%);
+    linear-gradient(180deg, transparent 58%, var(--kit-white) 58%),
+    linear-gradient(155deg, transparent 42%, var(--kit-white) 42% 48%, var(--kit-blue) 48% 54%, var(--kit-white) 54% 60%, transparent 60%),
+    var(--kit-blue);
 }
+.kit-whiteblue .jersey::before,
+.kit-whiteblue .jersey::after {
+  background: var(--kit-blue);
+}
+.kit-whiteblue .shorts { background: #111; }
+
+/* Mustard / blue checker */
 .kit-yellow .jersey,
 .kit-yellow .jersey::before,
 .kit-yellow .jersey::after {
-  background:
-    repeating-conic-gradient(from 0deg, var(--kit-yellow) 0 12deg, var(--kit-blue) 12deg 24deg);
-  background-size: 18px 18px;
+  background-color: var(--kit-yellow);
+  background-image:
+    repeating-linear-gradient(0deg, var(--kit-blue) 0 10px, transparent 10px 20px),
+    repeating-linear-gradient(90deg, var(--kit-blue) 0 10px, transparent 10px 20px);
+  background-size: 20px 20px;
+  background-blend-mode: multiply;
 }
 .kit-yellow .jersey {
-  background-image:
-    repeating-linear-gradient(45deg, var(--kit-yellow) 0 8px, var(--kit-blue) 8px 16px);
   animation: jersey-idle 3.2s ease-in-out infinite, check-shift 4s linear infinite;
 }
 .kit-yellow .shorts { background: var(--kit-white); }
+
+/* Navy over red with white belt */
 .kit-redblue .jersey {
-  background: linear-gradient(180deg, var(--red) 0 62%, var(--kit-blue) 62%);
+  background:
+    linear-gradient(180deg, var(--kit-blue) 0 42%, var(--kit-white) 42% 50%, var(--red) 50%);
 }
+.kit-redblue .jersey::before {
+  background: linear-gradient(180deg, var(--kit-blue) 0 42%, var(--kit-white) 42% 50%, var(--red) 50%);
+}
+.kit-redblue .jersey::after {
+  background: linear-gradient(180deg, var(--kit-blue) 0 42%, var(--kit-white) 42% 50%, var(--red) 50%);
+}
+.kit-redblue .shorts { background: var(--kit-white); }
+
+/* Navy pinstripe */
 .kit-blue .jersey,
 .kit-blue .jersey::before,
 .kit-blue .jersey::after {
   background:
     repeating-linear-gradient(90deg, #163a7a 0 3px, var(--kit-blue) 3px 8px);
 }
-.kit-current .jersey,
+.kit-blue .shorts { background: var(--kit-blue); }
+
+/* Current: red / black vertical stripes, black sleeves */
+.kit-current .jersey {
+  background: repeating-linear-gradient(90deg, var(--red) 0 10px, #111 10px 20px);
+  animation: jersey-idle 3.2s ease-in-out infinite, stripe-drift 1.4s linear infinite;
+}
 .kit-current .jersey::before,
 .kit-current .jersey::after {
-  background: repeating-linear-gradient(90deg, var(--red) 0 10px, var(--ink) 10px 20px);
-  animation: jersey-idle 3.2s ease-in-out infinite, stripe-drift 1.4s linear infinite;
+  background: #111;
 }
 .kit-current .shorts { background: #111; }
 
@@ -75,7 +103,7 @@
 }
 @keyframes check-shift {
   from { background-position: 0 0; }
-  to { background-position: 16px 16px; }
+  to { background-position: 20px 20px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .kit-card .jersey,
