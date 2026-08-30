@@ -591,34 +591,49 @@ input:focus, textarea:focus, select:focus {
 .gift-dialog video {
   display: block; width: 100%; aspect-ratio: 16/9; background: #000;
 }
-/* Pegben — skjult pirat på forsiden */
+/* Pegben — pirat på forsiden */
 .pegben-egg {
   position: absolute;
-  right: max(14px, 4vw);
-  top: 22%;
-  bottom: auto;
-  z-index: 3;
-  width: 72px;
-  height: 112px;
+  left: max(10px, 3vw);
+  top: 88px;
+  z-index: 5;
+  width: 132px;
+  height: 210px;
   padding: 0;
   border: 0;
   background: transparent;
-  opacity: 0.82;
-  filter: drop-shadow(0 0 10px color-mix(in oklab, var(--red) 55%, transparent)) drop-shadow(0 8px 10px rgba(0, 0, 0, 0.55));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+  filter:
+    drop-shadow(0 0 18px color-mix(in oklab, var(--red) 80%, transparent))
+    drop-shadow(0 10px 14px rgba(0, 0, 0, 0.7));
   cursor: pointer;
 }
 .pegben-egg img {
-  width: 100%;
-  height: 100%;
+  width: 132px;
+  height: 186px;
   object-fit: contain;
   pointer-events: none;
   animation: pegben-hop 1.7s var(--ease-out) infinite;
   transform-origin: 50% 100%;
 }
+.pegben-egg-tag {
+  font-family: var(--font-display);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  color: var(--cream);
+  background: color-mix(in oklab, var(--ink) 72%, transparent);
+  border: 1px solid var(--red);
+  padding: 3px 8px;
+  line-height: 1.2;
+}
 .pegben-egg:hover,
 .pegben-egg:focus-visible {
-  opacity: 1;
-  outline: 2px solid color-mix(in oklab, var(--cream) 55%, transparent);
+  outline: 2px solid var(--cream);
   outline-offset: 4px;
 }
 .pegben-egg.is-gone {
@@ -628,8 +643,8 @@ input:focus, textarea:focus, select:focus {
 .pegben-egg.is-gone img { animation: none; }
 @keyframes pegben-hop {
   0%, 100% { transform: translateY(0); }
-  40% { transform: translateY(-10px); }
-  65% { transform: translateY(-3px); }
+  40% { transform: translateY(-12px); }
+  65% { transform: translateY(-4px); }
 }
 .pegben-boom {
   position: fixed;
@@ -642,11 +657,11 @@ input:focus, textarea:focus, select:focus {
   animation: pegben-explode 0.5s steps(1) forwards;
 }
 @keyframes pegben-explode {
-  0% { opacity: 1; background-image: url("../pegben/explode-1.png"); transform: scale(0.55); }
-  22% { background-image: url("../pegben/explode-2.png"); transform: scale(1.05); }
-  48% { background-image: url("../pegben/explode-3.png"); transform: scale(1.25); }
-  74% { background-image: url("../pegben/explode-4.png"); transform: scale(1.1); }
-  100% { opacity: 0; background-image: url("../pegben/explode-4.png"); transform: scale(0.85); }
+  0% { opacity: 1; background-image: url("../assets/pegben/explode-1.png"); transform: scale(0.55); }
+  22% { background-image: url("../assets/pegben/explode-2.png"); transform: scale(1.05); }
+  48% { background-image: url("../assets/pegben/explode-3.png"); transform: scale(1.25); }
+  74% { background-image: url("../assets/pegben/explode-4.png"); transform: scale(1.1); }
+  100% { opacity: 0; background-image: url("../assets/pegben/explode-4.png"); transform: scale(0.85); }
 }
 .pegben-fs {
   position: fixed;
@@ -676,7 +691,17 @@ input:focus, textarea:focus, select:focus {
 }
 .pegben-fs-close:hover { background: var(--bg-subtle); }
 body.pegben-lock { overflow: hidden; }
+@media (max-width: 720px) {
+  .pegben-egg {
+    left: 8px;
+    top: 64px;
+    width: 96px;
+    height: 160px;
+  }
+  .pegben-egg img { width: 96px; height: 136px; }
+}
 @media (prefers-reduced-motion: reduce) {
   .pegben-egg img { animation: none; }
   .pegben-boom.is-on { animation: none; opacity: 0; }
 }
+

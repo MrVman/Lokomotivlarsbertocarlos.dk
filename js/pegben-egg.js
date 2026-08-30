@@ -1,5 +1,5 @@
 (function () {
-  const GAME_URL = "/pegben/index.html";
+  const GAME_URL = "/pegben";
 
   function boomSound() {
     try {
@@ -33,12 +33,16 @@
     const hero = document.querySelector(".hero");
     if (!hero) return;
 
-    const egg = document.createElement("button");
-    egg.type = "button";
-    egg.className = "pegben-egg";
-    egg.setAttribute("aria-label", "Pegben");
-    egg.innerHTML = '<img src="pegben/egg-pirate.png" alt="" width="72" height="112">';
-    hero.appendChild(egg);
+    let egg = document.querySelector(".pegben-egg");
+    if (!egg) {
+      egg = document.createElement("button");
+      egg.type = "button";
+      egg.className = "pegben-egg";
+      egg.setAttribute("aria-label", "Pegben — start spil");
+      egg.innerHTML =
+        '<img src="assets/pegben/egg-pirate.png" alt="" width="132" height="200"><span class="pegben-egg-tag">Pegben</span>';
+      hero.appendChild(egg);
+    }
 
     const boom = document.createElement("div");
     boom.className = "pegben-boom";
@@ -50,7 +54,7 @@
     overlay.hidden = true;
     overlay.innerHTML = `
       <button type="button" class="pegben-fs-close" aria-label="Luk spil">Luk</button>
-      <iframe title="Pegben" allow="fullscreen; gamepad; autoplay" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <iframe title="Pegben" allow="fullscreen; gamepad; autoplay"></iframe>
     `;
     document.body.appendChild(overlay);
 
@@ -80,14 +84,16 @@
       const req = overlay.requestFullscreen || overlay.webkitRequestFullscreen;
       if (req) req.call(overlay).catch(() => {});
       window.setTimeout(() => {
-        try { frame.contentWindow && frame.contentWindow.focus(); } catch (_) {}
+        try {
+          frame.contentWindow && frame.contentWindow.focus();
+        } catch (_) {}
         frame.focus();
       }, 80);
     }
 
     function explodeThenOpen() {
       const rect = egg.getBoundingClientRect();
-      const size = 220;
+      const size = 240;
       boom.style.width = size + "px";
       boom.style.height = size + "px";
       boom.style.left = rect.left + rect.width / 2 - size / 2 + "px";
