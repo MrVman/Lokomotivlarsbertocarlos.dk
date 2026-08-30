@@ -641,27 +641,74 @@ input:focus, textarea:focus, select:focus {
   pointer-events: none;
 }
 .pegben-egg.is-gone img { animation: none; }
+.pegben-egg.is-boom img { animation: none; }
 @keyframes pegben-hop {
   0%, 100% { transform: translateY(0); }
   40% { transform: translateY(-12px); }
   65% { transform: translateY(-4px); }
 }
-.pegben-boom {
+.hero.pegben-shake { animation: pegben-shake 0.45s ease-out; }
+@keyframes pegben-shake {
+  0%, 100% { transform: translate(0, 0); }
+  18% { transform: translate(-8px, 4px); }
+  36% { transform: translate(10px, -5px); }
+  54% { transform: translate(-6px, 3px); }
+  72% { transform: translate(4px, -2px); }
+}
+.pegben-fx {
   position: fixed;
+  inset: 0;
   z-index: 80;
   pointer-events: none;
-  opacity: 0;
-  background: no-repeat center / contain;
 }
-.pegben-boom.is-on {
-  animation: pegben-explode 0.5s steps(1) forwards;
+.pegben-fx-flash {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at var(--x) var(--y),
+    rgba(255, 230, 170, 0.92) 0%,
+    rgba(255, 90, 20, 0.4) 16%,
+    transparent 58%
+  );
+  animation: pegben-flash 0.7s ease-out forwards;
 }
-@keyframes pegben-explode {
-  0% { opacity: 1; background-image: url("../assets/pegben/explode-1.png"); transform: scale(0.55); }
-  22% { background-image: url("../assets/pegben/explode-2.png"); transform: scale(1.05); }
-  48% { background-image: url("../assets/pegben/explode-3.png"); transform: scale(1.25); }
-  74% { background-image: url("../assets/pegben/explode-4.png"); transform: scale(1.1); }
-  100% { opacity: 0; background-image: url("../assets/pegben/explode-4.png"); transform: scale(0.85); }
+.pegben-fx-shock {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  margin: -24px 0 0 -24px;
+  border: 3px solid rgba(255, 210, 130, 0.95);
+  border-radius: 50%;
+  animation: pegben-shock 0.75s ease-out forwards;
+}
+.pegben-fx-blast {
+  position: absolute;
+  width: min(420px, 78vw);
+  height: min(420px, 78vw);
+  margin: 0;
+  transform: translate(-50%, -50%);
+  object-fit: contain;
+  animation: pegben-blast 0.9s ease-out forwards;
+  filter: drop-shadow(0 0 28px #ff7a18);
+}
+.pegben-fx-sparks {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+@keyframes pegben-flash {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+@keyframes pegben-shock {
+  0% { transform: scale(0.15); opacity: 1; }
+  100% { transform: scale(14); opacity: 0; }
+}
+@keyframes pegben-blast {
+  0% { transform: translate(-50%, -50%) scale(0.28); opacity: 1; }
+  28% { transform: translate(-50%, -50%) scale(1.08); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
 }
 .pegben-fs {
   position: fixed;
@@ -701,7 +748,10 @@ body.pegben-lock { overflow: hidden; }
   .pegben-egg img { width: 96px; height: 136px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .pegben-egg img { animation: none; }
-  .pegben-boom.is-on { animation: none; opacity: 0; }
+  .pegben-egg img,
+  .hero.pegben-shake,
+  .pegben-fx-flash,
+  .pegben-fx-shock,
+  .pegben-fx-blast { animation: none; }
 }
 
