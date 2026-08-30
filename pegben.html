@@ -56,12 +56,36 @@
     .round:disabled { opacity: .4; }
     .cd { position: absolute; inset: 0; border-radius: inherit; background: color-mix(in oklab, var(--bg) 55%, transparent); pointer-events: none; }
     .title {
-      display: none; position: absolute; inset: 0; z-index: 20; flex-direction: column;
+      display: none; position: absolute; inset: 0; z-index: 20;
+      align-items: center; justify-content: center;
+      padding: 16px 16px 32px;
+      background: color-mix(in oklab, var(--bg) 42%, transparent);
+      overflow-y: auto;
     }
     #pegben-root[data-screen="title"] .title { display: flex; }
-    .title img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
-    .title-shade { position: absolute; inset: 0; background: linear-gradient(to top, var(--bg), color-mix(in oklab, var(--bg) 55%, transparent) 42%, color-mix(in oklab, var(--bg) 25%, transparent)); pointer-events: none; }
-    .title-cta { position: relative; z-index: 1; margin-top: auto; display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 20px 20px 48px; }
+    .guide {
+      width: min(26rem, 100%);
+      margin: auto;
+      border: 1px solid var(--border);
+      background: color-mix(in oklab, var(--surface) 94%, transparent);
+      border-radius: 12px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .guide h1 { font-family: var(--font-display); font-size: 28px; font-weight: 500; margin: 0; }
+    .guide p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.5; }
+    .guide ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .guide li {
+      font-size: 14px; line-height: 1.45; color: var(--fg);
+      padding-left: 1.1rem; position: relative;
+    }
+    .guide li::before {
+      content: ""; position: absolute; left: 0; top: 0.55em;
+      width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
+    }
+    .guide .keys { color: var(--muted); font-size: 12px; }
     .primary {
       pointer-events: auto; width: min(24rem, 100%); min-height: 48px; border: 0; border-radius: 12px;
       background: var(--accent); color: var(--accent-fg); font-size: 16px; font-weight: 500;
@@ -130,12 +154,20 @@
       </div>
     </div>
     <div class="title">
-      <img src="/assets/pegben/title.png" alt="">
-      <div class="title-shade"></div>
-      <div class="title-cta">
-        <button type="button" class="primary" data-act="start" data-start-hunt="true">Start spil</button>
+      <section class="guide">
+        <p class="kicker">Pegben</p>
+        <h1>Sørøveren med ét ben</h1>
+        <button type="button" class="primary" data-act="start" data-start-hunt="true">Start jagten</button>
+        <p>Han jager dig i labyrinten. Løb rundt om kasserne — han hopper, så du kan snyde ham.</p>
+        <ul>
+          <li>Bevæg med WASD, piletaster eller fingeren</li>
+          <li>Hop med mellemrum — over lavapøler fra bane 5</li>
+          <li>Sprint med Shift</li>
+          <li>Kast bombe med E og slå ham ud et øjeblik</li>
+        </ul>
+        <p class="keys">På telefon: joystick til venstre, knapper til højre.</p>
         <p class="best" data-best></p>
-      </div>
+      </section>
     </div>
     <div class="modal modal-pause">
       <section class="card">
